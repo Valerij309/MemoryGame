@@ -15,7 +15,6 @@ int level = 1;
 int player_answer = 0;
 
 void Random(){
-    squ[level - 1] = random(1,6);
 }
 void button_main(){
   
