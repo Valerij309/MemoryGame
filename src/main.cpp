@@ -6,29 +6,16 @@
 
 Adafruit_SSD1306 display(128, 64, &Wire, -1);
 int squ[] = {0,0,0,0,0};
-
-int led1 = 7;
-int led2 = 6;
-int led3 = 5;
-int led4 = 4;
-int led5 = 3;
-
-int button1 = 9;
-int button2 = 10;
-int button3 = 11;
-int button4 = 12;
-int button5 = 13;
+int leds[] = {7,6,5,4,3};
+int buttons[] = {13,12,11,10,9};
 
 int value = 0;
 
-
+int level = 1;
 int player_answer = 0;
 
 void Random(){
-  squ[random(5)] = random(3);
-  for(int i = 0; i < 5; i++){
-  Serial.println(squ[i]);
-  }
+    squ[level - 1] = random(1,6);
 }
 void button_main(){
   
@@ -42,18 +29,13 @@ void setup() {
   }
   display.clearDisplay();
   display.display();
+  for(int i = 0; i < 5; i++){
+  pinMode(leds[i], OUTPUT);
+  }
   
-  pinMode(led1, OUTPUT);
-  pinMode(led2, OUTPUT);
-  pinMode(led3, OUTPUT);
-  pinMode(led4, OUTPUT);
-  pinMode(led5, OUTPUT);
-  
-  pinMode(button1, INPUT_PULLUP);
-  pinMode(button2, INPUT_PULLUP);
-  pinMode(button3, INPUT_PULLUP);
-  pinMode(button4, INPUT_PULLUP);
-  pinMode(button5, INPUT_PULLUP);
+  for(int i = 0; i < 5; i++){
+  pinMode(buttons[i], INPUT_PULLUP);
+  }
 
   randomSeed(analogRead(A0) + analogRead(A1));
   Random();
